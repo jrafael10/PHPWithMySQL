@@ -1,0 +1,14 @@
+$page = $_GET['page'];
+
+if(isset($_GET['page'])){
+ $page = $_GET['page'];
+} else {
+$page = '1';
+}
+Short form of above code using ternary conjuction
+-$page = isset($_GET['page']) ? $_GET['page'] : '1';
+-$page = $_GET['page'] ?? '1'; --> PHP >7.0 -> Null Coalescing operator
+
+
+-->Used to check if value of $_GET['page'] exists by using 'isset'
+-->if it is set, use that value and set it to $page. If not, set the $page to 1;

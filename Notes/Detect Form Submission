@@ -1,0 +1,11 @@
+-Test if a key parameter has a value 
+-Test if submit parameter was sent
+-Test if request method is POST 
+
+<?php 
+
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //process form
+}
+
+?>

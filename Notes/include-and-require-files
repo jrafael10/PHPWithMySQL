@@ -1,0 +1,17 @@
+<?php include('funtions.php'); ?>
+
+Inside our PHP tags, we use include, and then the file name we want to include.
+
+-Libraries of functions
+-Layout sections:header, footer, navigation, sidebar
+-Reusable sections of code(HTML, PHP, and JS);
+
+-Include()
+-require() --> Works exactly like include does, except it raises an error if the file
+is not found and able to be loaded. Use require() if the file is essential to the operation
+of the rest of the page. If we get to require() and something is wrong, the rest of the php
+code will simply not execute. Include() doesn't do that.
+
+-include_once()  & require_once() --> works the same way as include() and require(), except
+that they also keep track in PHP when a file is loaded. And if you ask it to load that file again,
+it'll skip over it. 

@@ -1,0 +1,7 @@
+PHP-Database Interaction
+
+1. Create a database connection
+2. Perform a databse query
+3. Use returned data (if any)
+4. Release returned data
+5. Close the databse connection

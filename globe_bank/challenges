@@ -1,0 +1,85 @@
+CHallenge 1: Add a page 
+*Link from /staff/index.php to /staff/pages/index.php
+*Add HTML and PHP for /staff/pages/index.php.
+* Use /staff/subjects as a reference, but do not copy/paste
+*Use a $pages array to hold a list of pages.
+*Link each page to /staff/pages/show.php. 
+*Include the page ID as a URL parameter in that link
+*Retrieve and display the page ID
+
+Notes: 
+-Use the file path techniques for including files(include, require, include_once, required_once) and
+the constant that we shared for the shared path that we made us of. 
+
+-Use the URL techniques for creating links 
+-Encode dynamic data used for links and HTML;
+urlencode -> for dynamic data used in URLs
+htmlspecialchars -> for any dynamic data output to HTML
+
+*Set $page_title for all pages. 
+
+
+Challenge 2: Add Forms 
+
+Add form for /staff/pages/new.php 
+Add form for /staff/pages/edit.php 
+Add links to both pages 
+Remember: editing requires a page ID. 
+
+Add single-page form processing for both forms .
+If form was not submitted, display form 
+If form was submitted, display form parameters and form 
+Display submitted menu_name on the forms 
+
+Bonus: display submitted position and visible on forms 
+
+
+Challemge 3: 
+-Log into MySQL 
+-Use the database globe_bank
+-Create a table for pages 
+-pages: id ->primary key 
+        ->subject_id:integer 
+        ->menu_name: string 
+        ->position:integer 
+        ->visible:boolean 
+        ->content: text 
+-Add indexes on all foreign keys 
+-Add data for the pages: see Ch.5 video7 2:43 
+-Try CRUD SQL commands 
+-Find subjects by their primary key 
+-Find pages by their primary and foreign keys
+
+
+Challenge 4 :
+Use database connection from initialize.php
+Query pages table for all records, sorted by position.
+Put query in a function: find_all_pages()
+Loop through result set
+Free the result set when done using it
+Confirm the database connection is being closed
+Handle errors on the connection and query
+
+Challenge 5: Pages CRUD
+-Read a page: /staff/pages/show.php
+-Create a page: /staff/pages/new.php
+-Update a page: /staff/pages/edit.php
+-Delete a page: /staff/pages/delete.php
+-Select-option for position
+-Bonus: display subject names in place of subject_id
+-Advanced: Create a select-option of subjects -> on new. php and edit.php
+Hint: You may want to use a while loop instead of a for loop for these select options
+
+
+
+
+
+
+
+
+
+
+
+
+
+

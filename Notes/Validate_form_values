@@ -1,0 +1,9 @@
+Validate form values:
+
+-Validate data before creating and updating records
+-Same validations are often used for both
+-Put validations code in a reusable function
+-If validations fail, create or update is prevented
+-User needs to know what was wrong so they fix it.
+-Keep track of errors and report them
+-Reporting all errors at once is the best user experience

@@ -1,0 +1,33 @@
+
+We want the  '&' to be seen as data and not a meaningful 
+character in the url. 
+<a href="page.php?company=Widgets&More">Link</a>
+
+urlencode($string)
+
+
+rawurlencode($string)
+
+-Anything that is not reserved characters(Letters,
+numbers, underscorem and dash are unchanged)
+-Reserved characters are encoded.
+-urlencode: spaces become "+".
+-rawurlencode: spaces become "%20".
+
+How and Where to use it?
+rawurlencode the path 
+->Path is the part before the "?".
+Spaces must be encoded as "%20".
+
+urlencode the query string 
+Query string is the part after the "?".
+Spaces are better enoded as "+".
+
+
+urldecode($string) and rawurldecode($string)
+->These are rarely needed because PHP automatically calls 
+the decode functions  when it receives a url. 
+->As soon as PHP gets that URL, it parses it, it figures out whre 
+the query parameters are , it decodes the values, and then it puts 
+them into your superglobal forget, 
+

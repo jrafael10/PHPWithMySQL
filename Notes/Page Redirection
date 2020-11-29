@@ -1,0 +1,22 @@
+Section3 Movie 2 Page Redirection 
+
+-302 redirect 
+ 2 parts of 302 redirection 
+
+1: HTTP 1.1/302 Found 
+2: Location: path ->indicating the new url 
+that the browser should tru y instead
+
+-header("Location: login.php");
+
+Example 
+-User submits username/password on a log in page 
+-PHP code checks the user credentials 
+-If correct, user is sent to a success page.
+-If incorrect, user sent to a failure page.
+
+Caveat: 
+-Page redirects are sent in headers information
+-Headers are sent before page data. 
+-THerefore, changes must be made before any HTML output.
+-Page redirects must be sent before any HTML output. 

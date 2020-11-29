@@ -1,0 +1,24 @@
+HTTP Header
+
+We can use php to give instruction 
+to web server on how to construct this header. 
+We do that using the header function 
+header($string);
+$string can be any line added to the header 
+ex: 
+header("Content-Type: application/pdf");
+->THis tells the content-type should not be html 
+but they're about to send a pdf file. 
+ex:
+header("HTTP/1.1 404 Not Found");
+or
+header("HTTP/1.1 500 Internal Server Error");
+->Responding to browser with an error message 
+
+Notes: 
+-Headers are sent before page data
+-Changes must be made before any HTML output
+    Before a single space or line return 
+    Before whitespace in included files 
+    Can come after whitespace inside PHP tags
+    

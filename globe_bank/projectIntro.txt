@@ -1,0 +1,57 @@
+Blueprint:
+
+Public Area:
+-Site pages
+*navigation
+*page content
+*read only
+
+Admin Area
+Login page
+-form
+*username
+*password
+
+Admin menu: Manage content, Manage admins, logout
+-manage content
+-manage admins
+-logout
+
+
+Manage content
+-subjects
+-pages
+
+Manage admins
+-admins
+
+logout
+-do logout
+-back to login
+
+project directories structure
+public/ becomes our web document route
+everything in public/ is public. This is where to put all the web pages
+that a user should be able to see, as well as images, stylesheets, javaScripts,
+or any other media or assets that our website needs to function
+
+private directory: content should not be accessible by the public.
+This is where we can put our libraries of php code and the public won't be able
+to access it directly. But the php files in the public directory can still access
+that code stored in the private/ directory because they have access via the file system.
+THat is, they can navigate the hard drive structure in order to load those files.
+
+
+Index.php file: It's a good practice to always have index.php page in every single
+public directory that you create as it's possible to have a web server which is configured
+to display the contents of the directory whenever an index.php page is not present
+
+basic_php_project/
+  public/
+    index.php
+    images/
+    stylesheets/
+  private/
+    initialize.php
+    functions.php
+    shared/

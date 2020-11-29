@@ -1,0 +1,34 @@
+Section 3 Movie 3 : Output Buffering
+PHP code send data 
+then web server receives the output. 
+
+Think of a faucet(php code) pouring water on the glass(web server)
+As soon as the web server receives its first drops of data, it creates 
+the headers for the data and they can't be changed. Once the php code is complete,
+web server takes the accumulated data and send it to the users browser. 
+
+Output buffer: 
+
+output from the php code goes into the output buffer and then when it's full, or 
+when the php code is done, we take all of that data in the buffer, and we pour it into
+the web server. Then web server returns the data into the user's web browser just like before 
+
+Output Buffering 
+-Data in output buffer is editable 
+-Headers can be changed. 
+-Whitespace can be sent before header edits and redirects. 
+
+use phpinfo to check information about output buffering 
+
+You can turn on and off outout buffering 
+through php functions
+ob_start() ->starts out with buffering. THis 
+has to come before any content. THe same as headers 
+You can use it a second time if you've already got it turned on in your PHP file.
+
+ob_end_flush(); -> ends buffering and flushes 
+whatever result have accumulated over to the web server. 
+
+-Best to turn output buffering in in php.ini file
+-Use ob_start() when code may be ported to other servers 
+-

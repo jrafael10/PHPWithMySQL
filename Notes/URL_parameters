@@ -1,0 +1,26 @@
+example:
+
+somepage.php?page=2
+
+page=2 -->url parameter
+
+you can send more than one url parameter by using ampersand parameter between them
+
+somepage.php?category=7&page=3
+
+URL parameters are useful because they allow us to pass data from one page to another
+via links.
+
+-Super global variable: $_GET -> used to access the value of url parameter.
+Note: the url parameter is an associative array, so to access its value, you denote,
+$_GET['page'] in which page is the key.
+
+$page = $_GET['page'] --> setting the variable $page into the value of  global variable $_GET['page'];
+Values being retrieved from super globals are always going to be strings, even if the
+value being set is an integer.
+ex:
+
+$page_as_int = (int) $_GET['page']; --> casting the value of $_GET into integer since its value is retrieved as
+a string.
+echo gettype($page_as_int);
+//integer
