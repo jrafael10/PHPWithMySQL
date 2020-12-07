@@ -414,7 +414,7 @@ function insert_admin($admin){
         return $errors;
     }
 
-    $hashed_password = $admin['password'];
+    $hashed_password = password_hash($admin['password'], PASSWORD_BCRYPT);
 
     $sql = 'INSERT INTO admins ';
     $sql .= "(first_name, last_name, email, username, password) ";
@@ -452,7 +452,7 @@ function update_admin($admin) {
         return $errors;
     }
 
-    $hashed_password = $admin['password'];
+    $hashed_password = password_hash($admin['password'], PASSWORD_BCRYPT);
     $sql = "UPDATE admins SET ";
     $sql .= "first_name='" .db_escape($db, $admin['first_name']) . "', ";
     $sql .= "last_name='" .db_escape($db, $admin['last_name']) . "', ";
@@ -509,29 +509,34 @@ function validate_admin($admin){
         $errors[] = "Please write your email in a valid format.";
     }
 
-    if(!has_length($admin['username'], ['min' => 8, 'max' => 255])){
+
+    if(is_blank($admin['username'])){
+        $errors[] = "Username cannot be blank.";
+    }elseif(!has_length($admin['username'], array('min' => 8, 'max' => 255))){
         $errors[] = "Username must be between 8 and 255 characters.";
+    }elseif(!has_unique_username($admin['username'], $admin['id'] ?? 0)){
+        $errors[] = "Username not allowed. Try another";
     }
 
     
-    $current_id = $admin['id'] ?? '0';
-    if(!has_unique_username($admin['username'], $current_id)){
-        $errors[] = "username name must be unique.";
+    if(is_blank($admin['password'])) {
+        $errors[] = "Password cannot be blank.";
+    }elseif(!has_length($admin['password'], array('min' => 12))) {
+        $errors[] = "Password must contain 12 or more characters";
+    }elseif(!preg_match('/[A-Z]/', $admin['password'] )){
+        $errors[] = "Password must contatin at least 1 uppercase letter";
+    }elseif(!preg_match('/[a-z]/', $admin['password'])){
+        $errors[] = "Password must contatin at least 1 lowercase letter";
+    }elseif(!preg_match('/[0-9]/', $admin['password'])){
+        $errors[] = "Password must contatin at least 1 number";
+    }elseif(!preg_match('/[^A-Za-z0-9\s]/', $admin['password'])){
+        $errors[] = "Password must contatin at least 1 symbol";
     }
-
-    if(!has_length($admin['password'], ['min' => 12])) {
-        $errors[] = "Password should be at least 12 characters long.";
-    }elseif(!has_valid_password_format($admin['password'])){
-        $errors[] = "Password must have 1 uppercase, 1 lowercase, 1 number, and 1 symbol.";
-
-    }
-
-        
     
-   if(is_blank($admin['confirm_password'])){
+    if(is_blank($admin['confirm_password'])){
         $errors[] = 'Please confirm your password';
-    }elseif(!password_is_matched($admin['password'], $admin['confirm_password'])){
-        $errors[] = 'password is not matched.';
+    }elseif($admin['password'] !== $admin['confirm_password']){
+        $errors[] = 'Password and confirm password must match.';
 
     }
     
