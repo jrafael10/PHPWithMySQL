@@ -70,12 +70,12 @@ define("SHARED_PATH", PRIVATE_PATH . '/shared');
 
 $public_end = strpos($_SERVER['SCRIPT_NAME'], '/public') + 7; //returns 7
 
-echo $_SERVER['SCRIPT_NAME'] . "</br>";
-echo $public_end .'</br>';
+//echo $_SERVER['SCRIPT_NAME'] . "</br>";
+//echo $public_end .'</br>';
 
 
 $doc_root = substr($_SERVER['SCRIPT_NAME'], 0 , $public_end);
-echo "doc root: ". $doc_root;
+//echo "doc root: ". $doc_root;
 
 
 define("WWW_ROOT", $doc_root);

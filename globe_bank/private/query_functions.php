@@ -272,6 +272,8 @@ function insert_page($page) {
 
 }
 
+
+
 function find_page_by_id($id, $options=[]) {
     global $db;
     $visible = $options['visible'] ?? false;
@@ -382,12 +384,100 @@ function find_all_admins() {
     global $db;
     $sql = "SELECT * FROM admins ";
 
-    $sql .= "ORDER BY id ASC ";
+    $sql .= "ORDER BY last_name ASC, first_name ASC";
 
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
     return $result;
 
+}
+
+
+function find_admin_by_id($id){
+    global $db;
+
+    $sql = "SELECT * FROM admins ";
+    $sql .= "WHERE id='" . db_escape($db, $id) . "' ";
+    $result = mysqli_query($db, $sql);
+    $admin = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return $admin; 
+}
+
+
+function insert_admin($admin){
+    global $db;
+
+    $errors = validate_admin($admin);
+
+    if(!empty($errors)){
+        return $errors;
+    }
+
+    $hashed_password = $admin['password'];
+
+    $sql = 'INSERT INTO admins ';
+    $sql .= "(first_name, last_name, email, username, password) ";
+    $sql .= "VALUES (";
+    $sql .= "'" . db_escape($db, $admin['first_name']) . "', ";
+    $sql .= "'" . db_escape($db, $admin['last_name']) . "', ";
+    $sql .= "'" . db_escape($db, $admin['email']) . "', ";
+    $sql .= "'" . db_escape($db, $admin['username']) . "', ";
+    $sql .= "'" . db_escape($db, $hashed_password) . "'";
+    $sql .= ")";
+    $result = mysqli_query($db, $sql);
+
+    if($result) {
+        return true;
+    } else {
+        echo $sql;
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+
+
+}
+
+function update_admin($admin) {
+    global $db;
+
+    $errors = validate_admin($admin);
+
+    /*if(!has_unique_page_menu_name($page['position'])){
+      $errors[] =  "This menu name already exists";
+    }*/
+
+    if(!empty($errors)){
+        return $errors;
+    }
+
+    $hashed_password = $admin['password'];
+    $sql = "UPDATE admins SET ";
+    $sql .= "first_name='" .db_escape($db, $admin['first_name']) . "', ";
+    $sql .= "last_name='" .db_escape($db, $admin['last_name']) . "', ";
+    $sql .= "email='" .db_escape($db, $admin['email']) . "', ";
+    $sql .= "username='" .db_escape($db, $admin['username']) . "', ";
+    $sql .= "password='" .db_escape($db, $hashed_password) . "' ";
+
+    $sql .= "WHERE id ='" . db_escape($db, $admin['id']) . "' ";
+   
+    $sql .= "LIMIT 1";
+
+
+
+    $result = mysqli_query($db, $sql);
+    // For UPDATE statements, $result is true/false
+    if($result) {
+
+        return true;
+
+    } else {
+        //INSERT failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
 }
 
 
@@ -423,19 +513,48 @@ function validate_admin($admin){
         $errors[] = "Username must be between 8 and 255 characters.";
     }
 
+    
     $current_id = $admin['id'] ?? '0';
     if(!has_unique_username($admin['username'], $current_id)){
         $errors[] = "username name must be unique.";
     }
 
-    if(!has_length($admin['hashed_password'], ['min' => 12])) {
+    if(!has_length($admin['password'], ['min' => 12])) {
         $errors[] = "Password should be at least 12 characters long.";
-    }elseif(!has_valid_password_format($admin['hashed_password'])){
+    }elseif(!has_valid_password_format($admin['password'])){
         $errors[] = "Password must have 1 uppercase, 1 lowercase, 1 number, and 1 symbol.";
+
+    }
+
+        
+    
+   if(is_blank($admin['confirm_password'])){
+        $errors[] = 'Please confirm your password';
+    }elseif(!password_is_matched($admin['password'], $admin['confirm_password'])){
+        $errors[] = 'password is not matched.';
 
     }
     
      return $errors;
+}
+
+
+function delete_admin($id){
+    global $db;
+
+    $sql = "DELETE FROM admins ";
+    $sql .= "WHERE id='" . db_escape($db, $id) . "' ";
+    $sql .="LIMIT 1";
+    $result = mysqli_query($db, $sql);
+    if($result) {
+        return true;
+    } else {
+        //DELETE FAILED
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+
 
 }
 

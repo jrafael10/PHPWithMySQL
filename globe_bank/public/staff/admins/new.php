@@ -1,13 +1,36 @@
 <?php  require_once('../../../private/initialize.php');
 
 if(is_post_request()){
+    
     $admin = [];
-    $admin['first_name'] = $_POST['first_name'];
-    $admin['last_name'] = $_POST['last_name'];
-    $admin['email'] = $_POST['email'];
-    $admin['username'] = $_POST['username'];
-    $admin['password'] = $_POST['password'];
-    $admin['confirm_password'] = $_POST['confirm_password'];
+    $admin['first_name'] = $_POST['first_name'] ?? '';
+    $admin['last_name'] = $_POST['last_name'] ?? '';
+    $admin['email'] = $_POST['email'] ?? '';
+    $admin['username'] = $_POST['username'] ?? '';
+    $admin['password'] = $_POST['password'] ?? '';
+    $admin['confirm_password'] = $_POST['confirm_password'] ?? '';
+
+    $result = insert_admin($admin);
+
+   if($result === true){
+    print_r($admin);
+    $new_id = mysqli_insert_id($db);
+    $_SESSION['message'] = 'Admin created.';
+    redirect_to(url_for('/staff/admins/show.php?id=' . $new_id));
+    } else {
+        $errors = $result;
+    }
+
+} else {
+    $admin = [];
+    $admin['first_name'] = '';
+    $admin['last_name'] = '';
+    $admin['email'] = '';
+    $admin['username'] = '';
+    $admin['password'] = '';
+    $admin['confirm_password'] = '';
+
+
 }
 
 
@@ -50,7 +73,7 @@ if(is_post_request()){
         <dl>
 
             <dt>Password</dt>
-            <dd><input type="text" name="password" value="<?php if(isset($_POST['password'])) echo $_POST['password'];?>"/></dd>
+            <dd><input type="password" name="password" value="<?php if(isset($_POST['password'])) echo $_POST['password'];?>"/></dd>
 
 
         </dl>
@@ -58,7 +81,7 @@ if(is_post_request()){
         <dl>
 
             <dt>Confirm Password</dt>
-            <dd><input type="text" name="confirm_password" value="<?php if(isset($_POST['password'])) echo $_POST['password'];?>"/></dd>
+            <dd><input type="password" name="confirm_password" value="<?php if(isset($_POST['confirm_password'])) echo $_POST['confirm_password'];?>"/></dd>
 
 
         </dl>

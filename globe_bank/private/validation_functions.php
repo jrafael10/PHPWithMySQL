@@ -96,11 +96,16 @@
 
 
   function has_valid_password_format($value) {
-    $pass_regex = '/^[[:alnum:][:punct:]]+$/';
-    return preg_match($pass_regex, $value) === 1;
+    /*Password must have:
+    1 uppercase, 1 lowercase, 1 number, 1 symbol
+
+    */
+   $regex = '/(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/';
+   
+  return preg_match($regex, $value) === 1;
   }
 
-  function confirm_password($pass1, $pass2){
+  function password_is_matched($pass1, $pass2){
     return trim($pass1) === trim($pass2);
   }
 
@@ -125,11 +130,16 @@
     $sql .= "WHERE menu_name='" . db_escape($db, $menu_name) . "' ";
     $sql .= "AND id != '" .  db_escape($db, $current_id) . "'";
    $result = mysqli_query($db, $sql);
-    $row_count =  ($result);
+    $row_count = mysqli_num_rows($result);
     
     mysqli_free_result($result);
     return $row_count === 0;
 }
+
+
+
+
+
 
 
 ?>
