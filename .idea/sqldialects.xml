@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/Ex_Files_PHP_MySQL_EssT_Basics/Exercise Files/Chapter_05/05_05/globe_bank.sql" dialect="GenericSQL" />
-    <file url="PROJECT" dialect="MySQL" />
-  </component>
-</project>
