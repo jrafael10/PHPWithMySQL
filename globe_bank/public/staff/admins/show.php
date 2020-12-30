@@ -1,5 +1,9 @@
 <?php
+
+
 require_once('../../../private/initialize.php');
+echo $_SESSION['message'];
+require_login();
 
 ?>
 

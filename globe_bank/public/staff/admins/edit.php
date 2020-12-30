@@ -1,6 +1,8 @@
 <?php 
 require_once('../../../private/initialize.php');
 
+require_login();
+
 if(!isset($_GET['id'])) {
     redirect_to(url_for('/staff/admins/index.php'));
 
@@ -94,12 +96,12 @@ mysqli_free_result($admin_set);
             </dl>
             <dl>
                 <dt>Password</dt>
-                <dd><input type="text" name="password" value="<?php if(isset($admin['password'])) echo h($admin['password']); ?>" /></dd>
+                <dd><input type="password" name="password" value="" /></dd>
             </dl>
 
             <dl>
                 <dt>Confirm Password</dt>
-                <dd><input type="text" name="confirm_password" value="<?php if(isset($admin['password'])) echo h($admin['password']); ?>" /></dd>
+                <dd><input type="password" name="confirm_password" value="" /></dd>
             </dl>
 
 
