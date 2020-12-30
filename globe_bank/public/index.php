@@ -5,7 +5,7 @@
 $preview = false;
 if(isset($_GET['preview'])) {
   // previewing should require admin to be logged in
-  $preview = $_GET['preview'] == 'true' ? true : false;
+  $preview = $_GET['preview'] == 'true' && is_logged_in() ? true : false;
   
 }
 //If visible is true, there's a visibility check
@@ -15,6 +15,7 @@ if(isset($_GET['id'])) {
   $page_id = $_GET['id'];
   $page = find_page_by_id($page_id, ['visible' => $visible]);
   if(!$page) {
+    
     redirect_to(url_for('/index.php'));
   }
   $subject_id = $page['subject_id'];
