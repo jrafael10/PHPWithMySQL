@@ -1,5 +1,9 @@
 <?php require_once('../../../private/initialize.php'); 
-
+/*
+  My own account:
+  username: jesserafael
+  pw: !Q2w3e4r5t6y
+*/ 
 
     require_login();
     $admin_set = find_all_admins();
