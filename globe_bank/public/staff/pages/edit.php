@@ -1,6 +1,6 @@
 <?php 
 require_once('../../../private/initialize.php');
-
+require_login();
 if(!isset($_GET['id'])) {
     redirect_to(url_for('/staff/pages/index.php'));
 
@@ -63,7 +63,8 @@ mysqli_free_result($page_set);
 
 <div id = "content">
 
-    <a class="back-link" href="<?php echo url_for('/staff/pages/index.php'); ?>">&laquo; Back to List </a> 
+    <a class="back-link" href="<?php echo url_for('/staff/subjects/show.php?id=' . h(u($page['subject_id'])))?>">&laquo; Back to Subject Page</a>
+
 
     <div class = "subject edit">
         <h1>Edit Page </h1>

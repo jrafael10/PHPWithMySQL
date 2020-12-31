@@ -1,6 +1,6 @@
 <?php
 require_once('../../../private/initialize.php');
-
+require_login();
 ?>
 
 <!--
@@ -12,15 +12,8 @@ require_once('../../../private/initialize.php');
     $id = isset($_GET['id']) ? $_GET['id'] : '1';
     $page = find_page_by_id($id);
     $page_subject_id = $page['subject_id'];
-    $subject = find_subject_by_page_subject_id($page_subject_id);
-
-     //print_r($result['menu_name']);
-
-
-
-
-
-
+    $subject = find_subject_by_id($page_subject_id);
+   
 
 ?>
 <?php $page_title = 'Show Page'; ?>
@@ -29,7 +22,7 @@ require_once('../../../private/initialize.php');
 <div id="content">
     
 <!--&laquo is the back arrow html entity -->
-    <a class="back-link" href="<?php echo url_for('/staff/pages/index.php')?>">&laquo; Back to List</a>
+    <a class="back-link" href="<?php echo url_for('/staff/subjects/show.php?id=' . h(u($subject['id'])))?>">&laquo; Back to Subject Page</a>
 
 
     <div class="page show">
