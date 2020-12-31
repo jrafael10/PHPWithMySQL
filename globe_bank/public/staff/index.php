@@ -7,6 +7,9 @@
 constants are defined.-->
 <?php require_once('../../private/initialize.php');  ?>
 
+<?php //unset($_SESSION['admin_id']) ?>
+<?php require_login(); ?>
+
 
 
 
@@ -23,7 +26,7 @@ header.php can access that variable -->
           <!--<li><a href="subjects/index.php">Subjects</a> -->
           <li><a href="<?php echo url_for('/staff/subjects/index.php') ?>">Subjects</a>
           </li>
-          <li><a href="<?php echo url_for('/staff/pages/index.php') ?>">Pages</a>
+         
           </li>
           <li><a href="<?php echo url_for('/staff/admins/index.php') ?>">Admins</a>
           </li>
