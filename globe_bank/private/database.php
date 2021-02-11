@@ -25,7 +25,7 @@ function db_escape($connection, $string){
 
 function confirm_db_connect() {
     if(mysqli_connect_errno()) {
-        $msg = "Database connection failed:d ";
+        $msg = "Database connection failed:";
         $msg .= mysqli_connect_error();
         $msg .= " (" . mysqli_connect_errno() . ")";
         exit($msg);
